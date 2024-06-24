@@ -1,0 +1,10 @@
+// You will need delete all containers that were stopped as well as all volumes and networks and that are not used by any container. It will also remove all dangling images.
+docker system prune
+docker rmi -f $(docker image ls -a -q)
+
+//docker prune, docker rmi ..., df -h , df -ih and so may good but the reason is docker devicemapper Base Device Size . the docker info command give info about that.
+systemctl stop docker.service
+dockerd --storage-opt dm.basesize=20G
+(you should terminate the command with Ctrl+C)
+service start docker
+
